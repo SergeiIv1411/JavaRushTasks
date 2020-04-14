@@ -27,9 +27,10 @@ public class Solution implements Serializable, AutoCloseable {
     }
 
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
-        fileName = (String) in.readObject();
-        stream = new FileOutputStream(fileName, true);
         in.defaultReadObject();
+        //fileName = (String) in.readObject();
+        stream = new FileOutputStream(fileName, true);
+
     }
 
     @Override
@@ -38,7 +39,7 @@ public class Solution implements Serializable, AutoCloseable {
         stream.close();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Solution solution = new Solution("E:\\Work\\fileIN.txt");
         ObjectOutputStream outStream = new ObjectOutputStream(solution.stream);
         solution.writeObject("Data");
